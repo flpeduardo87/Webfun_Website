@@ -1,31 +1,67 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SquareArrowOutUpRight, ArrowRight } from "lucide-react";
+import imgFlavia from "@/assets/portfolio/projeto-flavia-sussenbach-advogados.webp";
+import imgTresReis from "@/assets/portfolio/projeto-frigorifico-tres-reis.webp";
+import imgMielke from "@/assets/portfolio/projeto-mielke-energia-solar.webp";
+import imgPerform from "@/assets/portfolio/projeto-perform-solucoes-industriais.webp";
+import imgDavet from "@/assets/portfolio/projeto-pousada-luiz-davet.webp";
+import imgSerelepe from "@/assets/portfolio/projeto-serelepe-kids.webp";
 
 const projects = [
   {
-    category: "Website",
-    title: "Clínica Médica Saúde Total",
-    description: "Site institucional com agendamento online",
-    metric: "+58% conversões",
-    period: "3 meses",
-    image: "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=800",
+    category: "Advocacia",
+    title: "Flavia Sussenbach Advogados",
+    description: "Site institucional para escritório de advocacia, com diversos serviços e contato rápido. Credibilidade e confiança.",
+    metric: "Projeto real",
+  period: "2025",
+  image: imgFlavia,
+    link: "https://flaviasussenbachadvogados.com.br/"
+  },
+  {
+    category: "Frigorífico",
+    title: "Frigorífico Três Reis",
+    description: "Loja virtual para frigorífico, apresentando produtos, estrutura e diferenciais. Foco em geração de novos negócios.",
+    metric: "Projeto real",
+    period: "2025",
+  image: imgTresReis,
+    link: "https://frigorificotresreis.com.br/"
+  },
+  {
+    category: "Energia Solar",
+    title: "Mielke Energia Solar",
+    description: "Site institucional para empresa de energia solar, com portfólio de projetos e simulação online. Destaque para sustentabilidade.",
+    metric: "Projeto real",
+    period: "2025",
+  image: imgMielke,
+    link: "https://mielkeenergiasolar.com.br/"
+  },
+  {
+    category: "Indústria",
+    title: "Perform Soluções Industriais",
+    description: "Site institucional para indústria, com catálogo de soluções e área técnica. Foco em captação de leads qualificados.",
+    metric: "Projeto real",
+    period: "2025",
+  image: imgPerform,
+    link: "https://perform.ind.br/"
+  },
+  {
+    category: "Turismo",
+    title: "Pousada Luiz Davet",
+    description: "Site institucional para pousada, com galeria de fotos, reservas e informações turísticas. Experiência digital para hóspedes.",
+    metric: "Projeto real",
+    period: "2025",
+  image: imgDavet,
+    link: "https://pousadaluizdavet.com.br/"
   },
   {
     category: "E-commerce",
-    title: "Arte & Mania",
-    description: "Loja virtual completa",
-    metric: "+125% vendas",
-    period: "6 meses",
-    image: "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    category: "Landing Page",
-    title: "Academia de Negócios",
-    description: "Landing page para lançamento",
-    metric: "72% conversão",
-    period: "1ª semana",
-    image: "https://images.pexels.com/photos/5926382/pexels-photo-5926382.jpeg?auto=compress&cs=tinysrgb&w=800",
+    title: "Serelepe Kids",
+    description: "Loja virtual para moda infantil, calculadora de fretes, pagamento online e integração com redes sociais. Foco em vendas.",
+    metric: "Projeto real",
+    period: "2025",
+  image: imgSerelepe,
+    link: "https://serelepekids.com/"
   },
 ];
 
@@ -67,16 +103,23 @@ export const Portfolio = () => {
                   {project.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-lg font-bold text-primary">{project.metric}</p>
-                    <p className="text-xs text-muted-foreground">{project.period}</p>
+                  <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-[12px] font-medium bg-primary/10 text-primary border-transparent">
+                            {project.category === "E-commerce" || project.title.toLowerCase().includes("loja") || project.description.toLowerCase().includes("loja") ? "Loja Virtual" : "Website"}
+                    </Badge>
+                    <Badge variant="outline" className="text-[12px] font-medium bg-primary/10 text-primary border-transparent">
+                      {project.period}
+                    </Badge>
                   </div>
                   <Button
                     variant="default"
                     size="icon"
                     className="bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500 h-10 w-10"
+                    asChild
                   >
-                    <SquareArrowOutUpRight className="h-4 w-4" />
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Ver projeto ${project.title}`}>
+                      <SquareArrowOutUpRight className="h-4 w-4" />
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -86,8 +129,8 @@ export const Portfolio = () => {
 
         <div className="text-center">
           <Button size="lg" className="px-6">
-            <a href="/pricing#pricing" className="flex items-center gap-2 justify-center">
-              Quero meu Site Profissional
+            <a href="/criacao-de-sites#planos" className="flex items-center gap-2 justify-center" style={{ textTransform: 'none' }}>
+              Quero meu site profissional
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>

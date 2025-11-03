@@ -8,10 +8,10 @@ import HomePage from "@/pages/Index.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ServicesPage from "@/pages/ServicesPage.tsx";
 import PortfolioPage from "@/pages/PortfolioPage.tsx";
-import PricingPage from "@/pages/Pricing.tsx";
+import PlanosPage from "@/pages/Planos.tsx";
 import ContactPage from "@/pages/ContactPage.tsx";
-import SiteInstitucionalPage from "@/pages/SiteInstitucional.tsx";
 import LojasVirtuaisPage from "@/pages/LojasVirtuais";
+import CriacaoDeSitesPage from "@/pages/CriacaoDeSites";
 import LandingPagesPage from "@/pages/LandingPages";
 import SocialMediaPage from "@/pages/SocialMedia";
 import TrafegoPagoPage from "@/pages/TrafegoPago";
@@ -49,14 +49,14 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/sobre" element={<AboutPage />} />
             <Route path="/servicos" element={<ServicesPage />} />
-            <Route path="/site-institucional" element={<SiteInstitucionalPage />} />
+            <Route path="/criacao-de-sites" element={<CriacaoDeSitesPage />} />
             <Route path="/lojas-virtuais" element={<LojasVirtuaisPage />} />
             <Route path="/landing-pages" element={<LandingPagesPage />} />
             <Route path="/social-media" element={<SocialMediaPage />} />
             <Route path="/trafego-pago" element={<TrafegoPagoPage />} />
             <Route path="/ia-para-negocios" element={<IAParaNegociosPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/planos" element={<PlanosPage />} />
             <Route path="/contato" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>

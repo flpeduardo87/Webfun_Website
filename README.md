@@ -1,22 +1,22 @@
-# Welcome to your Webfun project
+# Welcome to your Lovable project
 
 ## Project info
 
-**URL**: https://webfun.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22
+**URL**: https://lovable.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Webfun**
+**Use Lovable**
 
-Simply visit the [Webfun Project](https://webfun.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22) and start prompting.
+Simply visit the [Lovable Project](https://lovable.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22) and start prompting.
 
-Changes made via Webfun will be committed automatically to this repo.
+Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Webfun.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,15 +62,15 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Webfun](https://webfun.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22) and click on Share -> Publish.
+Simply open [Lovable](https://lovable.dev/projects/5200bdfd-4610-4e89-9f58-acc6f45d3f22) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Webfun project?
+## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.webfun.dev/features/custom-domain#custom-domain)
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
 
 ## Deploying to your hosting
 

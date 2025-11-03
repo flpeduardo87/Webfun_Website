@@ -11,12 +11,12 @@ const plans = [
     monthlyPrice: "99",
     features: [
       { name: "Site one-page moderno", included: true },
+      { name: "Hospedagem SSD dedicada", included: true },
       { name: "Otimização SEO básica", included: true },
       { name: "Integração WhatsApp", included: true },
-      { name: "Hospedagem inclusa", included: true },
-      { name: "Landing page exclusiva", included: false },
-      { name: "Loja virtual", included: false },
-      { name: "Suporte prioritário", included: false }
+      { name: "Suporte técnico básico", included: true },
+      { name: "Blog/Notícias", included: false },
+      { name: "Loja virtual", included: false }
     ]
   },
   {
@@ -25,12 +25,12 @@ const plans = [
     popular: true,
     features: [
       { name: "Site institucional moderno", included: true },
-      { name: "Landing page de alta conversão", included: true },
+      { name: "Hospedagem SSD dedicada", included: true },
       { name: "Otimização SEO avançada", included: true },
       { name: "Integração WhatsApp", included: true },
       { name: "Suporte técnico prioritário", included: true },
-      { name: "Loja virtual", included: false },
-      { name: "Gestão de tráfego pago", included: false }
+      { name: "Blog/Notícias", included: false },
+      { name: "Loja virtual", included: false }
     ]
   },
   {
@@ -38,11 +38,11 @@ const plans = [
     monthlyPrice: "249",
     features: [
       { name: "Loja virtual completa", included: true },
+      { name: "Hospedagem SSD dedicada", included: true },
       { name: "Integração com meios de pagamento", included: true },
       { name: "Otimização SEO para e-commerce", included: true },
       { name: "Integração WhatsApp e Instagram", included: true },
       { name: "Suporte técnico especializado", included: true },
-      { name: "Gestão de tráfego pago", included: true },
       { name: "Landing page exclusiva", included: true }
     ]
   }
@@ -64,13 +64,17 @@ export const Pricing = () => {
         <div className="mb-12 grid grid-cols-1 lg:grid-cols-3">
           <div className="lg:col-start-2 justify-self-stretch flex items-center">
             <div className="flex-1 flex justify-end pr-2">
-              <span className={!isAnnual ? "font-medium" : "text-muted-foreground"}>Mensal</span>
+              <span className={`${!isAnnual ? "font-medium" : "text-muted-foreground"} text-sm sm:text-base whitespace-nowrap`}>
+                Pagamento Mensal
+              </span>
             </div>
             <div className="px-3">
               <Switch checked={isAnnual} onCheckedChange={setIsAnnual} />
             </div>
             <div className="flex-1 flex justify-start pl-2">
-              <span className={isAnnual ? "font-medium" : "text-muted-foreground"}>Anual (-10%)</span>
+              <span className={`${isAnnual ? "font-medium" : "text-muted-foreground"} text-sm sm:text-base whitespace-nowrap`}>
+                Pagamento Único
+              </span>
             </div>
           </div>
         </div>
@@ -93,14 +97,14 @@ export const Pricing = () => {
                     </span>
                   </div>
                 )}
-                <CardHeader className="text-center pb-8">
+                <CardHeader className="text-left pb-8">
                   <CardTitle className="text-2xl mb-2">{plan.name}</CardTitle>
                   <div className="space-y-2">
                     {isAnnual ? (
                       <>
-                        <div className="flex items-baseline justify-center gap-1">
+                        <div className="flex items-baseline justify-start gap-1">
                           <span className="text-4xl font-bold">R$ {annualFormatted}</span>
-                          <span className="text-muted-foreground">/ ano</span>
+                          <span className="text-muted-foreground">/pagamento único</span>
                         </div>
                         {/* Removido texto redundante 'ou R$ ... à vista' */}
                         <p className="text-xs text-primary font-medium">
@@ -109,9 +113,9 @@ export const Pricing = () => {
                       </>
                     ) : (
                       <>
-                        <div className="flex items-baseline justify-center gap-1">
+                        <div className="flex items-baseline justify-start gap-1">
                           <span className="text-4xl font-bold">R$ {plan.monthlyPrice}</span>
-                          <span className="text-muted-foreground">/ mês</span>
+                          <span className="text-muted-foreground">/por mês</span>
                         </div>
                         <p className="text-xs text-primary font-medium">Pagamento recorrente mensal</p>
                       </>
@@ -146,8 +150,8 @@ export const Pricing = () => {
                     variant={plan.popular ? "default" : "outline"}
                     size="lg"
                   >
-                    <span className="flex items-center justify-center gap-2 w-full">
-                      Contratar Agora
+                    <span className="flex items-center justify-center gap-2 w-full" style={{ textTransform: 'none' }}>
+                      Contratar agora
                       <ArrowRight className="w-5 h-5" />
                     </span>
                   </Button>

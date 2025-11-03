@@ -47,8 +47,8 @@ export const Contact = () => {
                     aria-label="Fale conosco no WhatsApp"
                     className="inline-flex items-center gap-2"
                   >
-                    <MessageCircle className="h-5 w-5" />
                     Dúvidas? Fale conosco
+                    <MessageCircle className="h-5 w-5" />
                   </a>
                 </Button>
                 <span className="text-base text-muted-foreground">

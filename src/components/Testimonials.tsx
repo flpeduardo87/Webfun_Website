@@ -1,4 +1,4 @@
-import { Star, Quote, ArrowRight } from "lucide-react";
+import { Quote, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "Ketlyn Calliari",
     company: "Studio LK",
-    avatar: "https://webfun.com.br/wp-content/uploads/2025/09/ketlyn-avatar.png",
+  avatar: "avatars/ketlyn-avatar.png",
     rating: 5,
     text:
       "Me ajudaram demais. Eu precisava de um site com um pouco de rapidez e eles entregaram dentro do prazo. Recomendo a todos!",
@@ -33,7 +33,7 @@ const testimonials: Testimonial[] = [
     id: 2,
     name: "Adriano de Liz",
     company: "Mudanças Adriano",
-    avatar: "https://webfun.com.br/wp-content/uploads/2025/09/adriano-avatar.png",
+  avatar: "avatars/adriano-avatar.png",
     rating: 5,
     text:
       "Tudo fluiu muito rápido e em alguns dias meu site estava no ar. Fiquei muito feliz com o resultado. Foi um ótimo investimento para meu negócio!",
@@ -42,10 +42,37 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Felippe Davet",
     company: "Pousada Luiz Davet",
-    avatar: "https://webfun.com.br/wp-content/uploads/2025/09/felippe-avatar.png",
+  avatar: "avatars/felippe-avatar.png",
     rating: 5,
     text:
       "Me ajudaram demais. Eu precisava de um site com um pouco de rapidez e eles entregaram dentro do prazo. Recomendo a todos!",
+  },
+  {
+    id: 4,
+    name: "Flavia Süssenbach",
+    company: "Flavia Süssenbach Advogados",
+    avatar: "avatars/flavia-avatar.png",
+    rating: 5,
+    text:
+      "A WebFun superou minhas expectativas. Atendimento excelente, entrega rápida e resultado acima do esperado. Recomendo para todos que buscam qualidade!",
+  },
+  {
+    id: 5,
+    name: "João Krull",
+    company: "Frigorífico Três Reis",
+  avatar: "avatars/joao-avatar.png",
+    rating: 5,
+    text:
+      "O site ficou incrível, rápido, fácil de atualizar e trouxe mais clientes. Atendimento nota 10! Recomendo a WebFun para quem quer crescer online.",
+  },
+  {
+    id: 6,
+    name: "Jean Mielke",
+    company: "Mielke Energia Solar",
+    avatar: "avatars/jean-avatar.png",
+    rating: 5,
+    text:
+      "Equipe super atenciosa, criaram um site lindo, funcional e fácil de usar. Recomendo para quem busca resultado rápido e profissional!",
   },
 ];
 
@@ -65,17 +92,23 @@ export const Testimonials = () => {
 
   useEffect(() => {
     if (!api) return;
+    // Só roda autoplay se houver mais de um slide
+    if (testimonials.length < 2) return;
     const id = setInterval(() => {
-      api.scrollNext();
-    }, 4000);
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0);
+      }
+    }, 7000);
     return () => clearInterval(id);
   }, [api]);
   return (
     <section className="py-12 md:py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-8 max-w-3xl text-center">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight leading-tight sm:text-4xl md:text-5xl">
-            O que nossos <span className="text-primary">clientes dizem</span>
+          <h2 className="mb-4 text-3xl font-bold tracking-tight leading-tight sm:text-4xl md:text-5xl text-foreground">
+            O que nossos clientes dizem
           </h2>
           <p className="text-lg leading-snug text-muted-foreground">
             Depoimentos reais de quem já acelerou os resultados com a WebFun
@@ -86,7 +119,7 @@ export const Testimonials = () => {
           <Carousel opts={{ align: "start", loop: true }} setApi={setApi}>
             <CarouselContent>
               {testimonials.map((t) => (
-                <CarouselItem key={t.id} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={t.id} className="md:basis-1/3 lg:basis-1/3">
                   <article className="group relative h-full rounded-2xl border bg-card p-6 md:p-7 lg:p-8 shadow-sm transition-all hover:shadow-lg">
                     {/* Selo de aspas elegante */}
                     <div className="pointer-events-none absolute top-3 right-4 hidden md:block">
@@ -97,9 +130,7 @@ export const Testimonials = () => {
 
                     {/* Estrelas */}
                     <div className="mb-4 flex gap-1">
-                      {Array.from({ length: t.rating }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                      ))}
+                      <span className="text-[20px] font-bold" style={{ color: '#EAB308', letterSpacing: '2px' }}>★★★★★</span>
                     </div>
 
                     {/* Texto do depoimento */}
@@ -146,8 +177,8 @@ export const Testimonials = () => {
         {/* CTA abaixo */}
         <div className="mt-10 text-center">
           <Button asChild size="lg" className="px-6">
-            <a href="/portfolio" className="flex items-center gap-2 justify-center">
-              Veja mais em Portfólio
+            <a href="/portfolio" className="flex items-center gap-2 justify-center" style={{ textTransform: 'none' }}>
+              Veja mais em portfólio
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>

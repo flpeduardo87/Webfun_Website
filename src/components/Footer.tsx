@@ -5,7 +5,7 @@ import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, MessageCircle } fro
 export const Footer = () => {
   return (
     <footer className="border-t bg-muted/30">
-      <div className="container mx-auto px-4 py-12">
+  <div className="container mx-auto px-4 pt-12 pb-0">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
@@ -71,18 +71,18 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary">
+                <a href="https://webfun.com.br/criacao-de-sites" className="text-muted-foreground hover:text-primary">
                   Lojas Virtuais
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary">
+                <a href="https://webfun.com.br/lojas-virtuais" className="text-muted-foreground hover:text-primary">
                   Landing Pages
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary">
-                  Otimização SEO
+                <a href="https://webfun.com.br/social-media" className="text-muted-foreground hover:text-primary">
+                  Social Media
                 </a>
               </li>
             </ul>
@@ -103,7 +103,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/pricing" className="text-muted-foreground hover:text-primary">
+                <a href="/planos" className="text-muted-foreground hover:text-primary">
                   Planos
                 </a>
               </li>
@@ -139,8 +139,21 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t pt-8 text-center text-base text-muted-foreground">
-          <p>Feito com <span className="text-red-500">❤️</span> por Webfun &copy; {new Date().getFullYear()} - Todos os direitos reservados.</p>
+        <div className="mt-8 border-t pt-6 pb-6 text-center text-base text-muted-foreground">
+          <p className="text-[14px]">
+            Feito com <span className="text-red-500">❤️</span> por
+            {" "}
+            <a
+              href="https://webfun.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold hover:text-primary"
+            >
+              Webfun
+            </a>
+            {/* Mostrar © somente em desktop */}
+            <span className="hidden md:inline"> {" "} &copy; {new Date().getFullYear()}</span>
+          </p>
         </div>
       </div>
     </footer>

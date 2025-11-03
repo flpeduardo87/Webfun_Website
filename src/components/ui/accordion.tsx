@@ -1,37 +1,45 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-
-const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className={cn("border-b", className)} {...props} />
+  <AccordionPrimitive.Item ref={ref} className={cn("border-b border-muted-foreground/20", className)} {...props} />
 ));
 AccordionItem.displayName = "AccordionItem";
 
+const Accordion = AccordionPrimitive.Root;
+
+interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
+  icon?: React.ReactNode;
+  hideChevron?: boolean;
+}
+
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  AccordionTriggerProps
+>(({ className, children, icon, hideChevron = false, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className,
+        "flex flex-1 items-center py-4 font-medium transition-all hover:bg-muted/40 px-4 text-[17px] gap-3",
+        className
       )}
       {...props}
     >
-      {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
+      {icon && <span className="flex items-center gap-3 text-primary text-[22px]">{icon}</span>}
+      <span className="flex-1 text-left">{children}</span>
+      {!hideChevron && (
+        <ChevronDown className="ml-auto h-5 w-5 text-muted-foreground transition-transform data-[state=open]:rotate-180" />
+      )}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
+// (duplicate/erroneous block removed)
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<

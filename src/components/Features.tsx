@@ -101,9 +101,9 @@ export const Features = () => {
                   <ul className="space-y-3">
                     {feature.items.map((item, index) => (
                       <li key={index} className="flex items-center gap-3">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
                           <Check className="h-4 w-4 text-primary" />
-                        </div>
+                        </span>
                         <span className="font-medium">{item}</span>
                       </li>
                     ))}
@@ -118,8 +118,9 @@ export const Features = () => {
                         rel="noopener noreferrer"
                         aria-label={`Falar no WhatsApp sobre ${feature.label}`}
                         className="inline-flex items-center gap-2"
+                        style={{ textTransform: 'none' }}
                       >
-                        {feature.ctaLabel}
+                        {feature.ctaLabel.charAt(0).toUpperCase() + feature.ctaLabel.slice(1).toLowerCase()}
                         <feature.icon className="h-5 w-5" />
                       </a>
                     </Button>

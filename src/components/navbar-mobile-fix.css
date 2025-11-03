@@ -1,0 +1,10 @@
+/* Remove o chevron cinza padrão do AccordionTrigger (pseudo-elemento ::after) */
+.AccordionTrigger::after {
+  display: none !important;
+}
+/* Remove chevron cinza padrão do AccordionTrigger no mobile navbar */
+
+/* O AccordionTrigger padrão geralmente usa um pseudo-elemento ::after para o chevron. */
+.AccordionTrigger::after {
+  display: none !important;
+}

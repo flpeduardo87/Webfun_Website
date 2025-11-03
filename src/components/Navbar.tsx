@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Menu,
@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Sparkles,
   ArrowRight,
+  Headphones,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -24,12 +25,20 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import "./navbar-mobile-fix.css";
 import logoLight from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
 
 const services: { title: string; description: string; href: string; icon: LucideIcon }[] = [
-  { title: "Criação de Sites", description: "Seu site pronto para gerar resultados.", href: "/site-institucional", icon: Globe },
+  { title: "Criação de Sites", description: "Seu site pronto para gerar resultados.", href: "/criacao-de-sites", icon: Globe },
   { title: "Lojas Virtuais", description: "Venda online com estrutura profissional.", href: "/lojas-virtuais", icon: ShoppingCart },
   { title: "Landing Pages", description: "Páginas que vendem e geram leads.", href: "/landing-pages", icon: FileText },
   { title: "Social Media", description: "Gestão e conteúdo para redes sociais.", href: "/social-media", icon: Megaphone },
@@ -40,13 +49,28 @@ const services: { title: string; description: string; href: string; icon: Lucide
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background md:bg-background/95 md:backdrop-blur md:supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-3 md:px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link
+            to="/"
+            className="flex items-center"
+            onClick={(e) => {
+              // Se já estiver na Home, apenas rola suavemente para o topo
+              if (location.pathname === "/") {
+                e.preventDefault();
+                try {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } catch {
+                  window.scrollTo(0, 0);
+                }
+              }
+            }}
+          >
             <span className="inline-flex items-center gap-2">
               <img src={logoLight} alt="WebFun" className="h-9 w-auto md:h-10 dark:hidden" />
               <img src={logoDark} alt="WebFun" className="hidden h-9 w-auto md:h-10 dark:block" />
@@ -109,7 +133,7 @@ export const Navbar = () => {
                   <Link to="/portfolio" className="text-base font-medium transition-colors hover:text-primary">
               Portfólio
             </Link>
-            <Link to="/pricing" className="text-base font-medium transition-colors hover:text-primary">
+            <Link to="/planos" className="text-base font-medium transition-colors hover:text-primary">
               Planos
             </Link>
             <Link to="/contato" className="text-base font-medium transition-colors hover:text-primary">
@@ -140,8 +164,9 @@ export const Navbar = () => {
                 rel="noopener noreferrer"
                 aria-label="Falar no WhatsApp"
                 className="flex items-center gap-2"
+                style={{ textTransform: 'none' }}
               >
-                Começar Agora <ArrowRight className="w-5 h-5" />
+                Começar agora <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
 
@@ -175,78 +200,97 @@ export const Navbar = () => {
       {isOpen && (
         <div className="md:hidden pb-4 animate-fade-in">
           <div className="container mx-auto px-3 md:px-4">
-            <div className="flex flex-col space-y-3 rounded-2xl border bg-card p-4 shadow-sm">
+            <div className="flex flex-col space-y-3 rounded-2xl border bg-card p-4 shadow-sm max-h-[80vh] overflow-y-auto">
               <Link
                 to="/"
-                className="text-base font-medium transition-colors hover:text-primary"
+                className="text-[24px] font-semibold text-foreground"
                 onClick={() => setIsOpen(false)}
               >
                 Início
               </Link>
               <Link
                 to="/sobre"
-                className="text-base font-medium transition-colors hover:text-primary"
+                className="text-[24px] font-semibold text-foreground"
                 onClick={() => setIsOpen(false)}
               >
                 Sobre
               </Link>
 
-              <div className="space-y-2">
-                <div className="flex items-center text-base font-medium">
-                  Serviços
-                </div>
-                <div className="ml-1 grid grid-cols-1 gap-2">
-                  {services.map((service) => {
-                    const Icon = service.icon;
-                    return (
-                      <Link
-                        key={service.title}
-                        to={service.href}
-                        className="group flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-accent focus:bg-accent"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20 transition-colors duration-200 group-hover:bg-primary group-focus:bg-primary">
-                          <Icon className="h-5 w-5 text-primary transition-colors duration-200 group-hover:text-primary-foreground group-focus:text-primary-foreground" />
-                        </span>
-                        <span>
-                          <div className="text-base font-medium leading-none transition-colors group-hover:text-white group-focus:text-white">
-                            {service.title}
-                          </div>
-                          <p className="text-sm text-muted-foreground transition-colors group-hover:text-white group-focus:text-white">
-                            {service.description}
-                          </p>
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
+              {/* Sanfona/acordeon para Serviços sem ícone, fonte 24px 600, itens alinhados à esquerda */}
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="servicos" className="border-none">
+                  <AccordionTrigger hideChevron className="text-[24px] font-semibold py-2 px-0 text-left text-foreground no-underline hover:no-underline flex items-center gap-2 w-full">
+                    <span className="flex items-center gap-2">
+                      Serviços
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                    {/* Remover o chevron padrão do AccordionTrigger via CSS */}
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-2 pb-1">
+                    <div className="flex flex-col gap-2 items-start">
+                      {services.map((service) => {
+                        const Icon = service.icon;
+                        return (
+                          <Link
+                            key={service.title}
+                            to={service.href}
+                            className="flex items-center gap-3 rounded-md p-2 w-full text-left text-foreground"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+                              <Icon className="h-5 w-5 text-primary" />
+                            </span>
+                            <span className="text-left">
+                              <div className="text-[16px] font-semibold leading-none text-foreground">
+                                {service.title}
+                              </div>
+                              <p className="text-[14px] text-muted-foreground">
+                                {service.description}
+                              </p>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
 
               <Link
                 to="/portfolio"
-                className="text-base font-medium transition-colors hover:text-primary"
+                className="text-[24px] font-semibold text-foreground"
                 onClick={() => setIsOpen(false)}
               >
                 Portfólio
               </Link>
               <Link
-                to="/pricing"
-                className="text-base font-medium transition-colors hover:text-primary"
+                to="/planos"
+                className="text-[24px] font-semibold text-foreground"
                 onClick={() => setIsOpen(false)}
               >
-                Pricing
+                Planos
               </Link>
               <Link
                 to="/contato"
-                className="text-base font-medium transition-colors hover:text-primary"
+                className="text-[24px] font-semibold text-foreground"
                 onClick={() => setIsOpen(false)}
               >
                 Contato
               </Link>
 
               <div className="pt-3">
-                <Button className="w-full" onClick={() => setIsOpen(false)}>
-                  Pedir Orçamento
+                <Button asChild className="w-full text-[16px] py-3">
+                  <a
+                    href={`https://wa.me/5547997618824?text=${encodeURIComponent(
+                      "Olá! Vim pelo site e quero entender como vocês podem ajudar meu negócio."
+                    )}&utm_source=site&utm_medium=navbar_mobile_cta&utm_campaign=whatsapp_cta`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Falar com atendente <Headphones className="w-5 h-5" />
+                  </a>
                 </Button>
               </div>
             </div>
